@@ -1,0 +1,7 @@
+{
+  "name": "Remix: Bazaar Ramadhan Locator",
+  "description": "Find the nearest Bazaar Ramadhan, mosques, and public transport with reviews and directions.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
