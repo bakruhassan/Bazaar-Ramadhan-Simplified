@@ -9,7 +9,7 @@ const getAuthHeader = () => {
 };
 
 export async function login(email, password) {
-  const res = await fetch("/api/auth/login", {
+  const res = await fetch("/.netlify/functions/api/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
@@ -19,7 +19,7 @@ export async function login(email, password) {
 }
 
 export async function signup(username, email, password) {
-  const res = await fetch("/api/auth/signup", {
+  const res = await fetch("/.netlify/functions/api/auth/signup", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, email, password }),
@@ -29,7 +29,7 @@ export async function signup(username, email, password) {
 }
 
 export async function getMe() {
-  const res = await fetch("/api/auth/me", {
+  const res = await fetch("/.netlify/functions/api/auth/me", {
     headers: getAuthHeader(),
   });
   if (!res.ok) return null;
@@ -37,7 +37,7 @@ export async function getMe() {
 }
 
 export async function subscribe(placeId) {
-  const res = await fetch("/api/subscribe", {
+  const res = await fetch("/.netlify/functions/api/subscribe", {
     method: "POST",
     headers: { "Content-Type": "application/json", ...getAuthHeader() },
     body: JSON.stringify({ place_id: placeId }),
@@ -46,7 +46,7 @@ export async function subscribe(placeId) {
 }
 
 export async function getNotifications() {
-  const res = await fetch("/api/notifications", {
+  const res = await fetch("/.netlify/functions/api/notifications", {
     headers: getAuthHeader(),
   });
   if (!res.ok) return [];
@@ -54,7 +54,7 @@ export async function getNotifications() {
 }
 
 export async function markNotificationsRead() {
-  const res = await fetch("/api/notifications/read", {
+  const res = await fetch("/.netlify/functions/api/notifications/read", {
     method: "POST",
     headers: getAuthHeader(),
   });
@@ -98,12 +98,12 @@ export async function searchPlaces(query: string, lat?: number, lng?: number): P
 }
 
 export async function getVotes(placeId: string) {
-  const res = await fetch(`/api/votes/${encodeURIComponent(placeId)}`);
+  const res = await fetch(`/.netlify/functions/api/votes/${encodeURIComponent(placeId)}`);
   return res.json();
 }
 
 export async function submitVote(placeId: string, voteType: number, fingerprint: string) {
-  const res = await fetch("/api/votes", {
+  const res = await fetch("/.netlify/functions/api/votes", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ place_id: placeId, vote_type: voteType, user_fingerprint: fingerprint }),
@@ -112,12 +112,12 @@ export async function submitVote(placeId: string, voteType: number, fingerprint:
 }
 
 export async function getReviews(placeId: string) {
-  const res = await fetch(`/api/reviews/${encodeURIComponent(placeId)}`);
+  const res = await fetch(`/.netlify/functions/api/reviews/${encodeURIComponent(placeId)}`);
   return res.json();
 }
 
 export async function addReview(review: { place_id: string; rating: number; comment: string }) {
-  const res = await fetch("/api/reviews", {
+  const res = await fetch("/.netlify/functions/api/reviews", {
     method: "POST",
     headers: { "Content-Type": "application/json", ...getAuthHeader() },
     body: JSON.stringify(review),
